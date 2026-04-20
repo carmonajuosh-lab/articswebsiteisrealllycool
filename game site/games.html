@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login | Log in to i-ready Connect</title>
+
+<style>
+:root {
+    color-scheme: dark;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #070b16;
+    color: #eef2ff;
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* ===== BACKGROUND LAYERS ===== */
+#particles, #grid, #scanlines {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+}
+
+#particles {
+    z-index: 0;
+}
+
+#grid {
+    z-index: 1;
+    background-image:
+        linear-gradient(rgba(123,91,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(123,91,255,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridMove 12s linear infinite;
+    opacity: 0.5;
+}
+
+@keyframes gridMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(60px); }
+}
+
+#scanlines {
+    z-index: 2;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.02),
+        rgba(255,255,255,0.02) 1px,
+        transparent 1px,
+        transparent 4px
+    );
+    opacity: 0.25;
+}
+
+/* ===== CONTENT ===== */
+.page-shell {
+    position: relative;
+    z-index: 5;
+    max-width: 1100px;
+    margin: auto;
+    padding: 40px 20px;
+}
+
+.page-header {
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    letter-spacing: 5px;
+    margin: 0;
+}
+
+#searchBar {
+    width: 100%;
+    max-width: 420px;
+    padding: 12px;
+    margin-top: 20px;
+    border-radius: 999px;
+    border: none;
+    text-align: center;
+    background: rgba(255,255,255,0.08);
+    color: white;
+}
+
+/* GRID */
+.game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 260px));
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+/* CARD */
+.game-card {
+    border-radius: 18px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    transition: 0.25s;
+}
+
+.game-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+
+.game-thumbnail img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.game-label {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* HOME */
+.home-button {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+    padding: 10px 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg,#ff5b77,#7b5bff);
+    color: white;
+    text-decoration: none;
+}
+
+/* ===== CURSOR ===== */
+.cursor {
+    width: 14px;
+    height: 14px;
+    background: #7b5bff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    box-shadow: 0 0 20px #7b5bff;
+}
+
+.trail {
+    width: 8px;
+    height: 8px;
+    background: rgba(123,91,255,0.6);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    animation: fadeOut 0.6s forwards;
+}
+
+@keyframes fadeOut {
+    to { opacity: 0; transform: scale(0.3); }
+}
+
+.ripple {
+    position: fixed;
+    border-radius: 50%;
+    border: 2px solid rgba(123,91,255,0.8);
+    width: 10px;
+    height: 10px;
+    animation: rippleAnim 0.6s ease-out forwards;
+}
+
+@keyframes rippleAnim {
+    to { width: 80px; height: 80px; opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+<div id="grid"></div>
+<div id="scanlines"></div>
+
+<div class="cursor"></div>
+
+<a class="home-button" href="../index.html">🏠 Home</a>
+
+<div class="page-shell">
+
+<div class="page-header">
+    <h1>Artics Games</h1>
+    <input id="searchBar" placeholder="Search games...">
+</div>
+
+
+    <div class="game-grid">
+
+    <!-- Granny -->
+    <div class="game-card">
+        <a href="./games/granny.html">
+            <div class="game-thumbnail">
+                <img src="https://www.metacritic.com/a/img/resize/9b96fb02bb002ac30b36f457f64baea5d2700779/catalog/provider/6/12/6-1-665385-52.jpg?auto=webp&fit=contain&height=480">
+                <div class="game-label">Granny</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Geometry Dash -->
+    <div class="game-card">
+        <a href="./games/geometrydash.html">
+            <div class="game-thumbnail">
+                <img src="https://cdn.imgbin.com/1/9/8/imgbin-geometry-dash-an-impossible-game-dodge-the-spikes-flip-gravity-amazon-com-geometrical-ebz7x4WbggHmCKMJTLFFyYG5P.jpg">
+                <div class="game-label">Geometry Dash</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Retro Bowl -->
+    <div class="game-card">
+        <a href="./games/retrobowl.html">
+            <div class="game-thumbnail">
+                <img src="https://upload.wikimedia.org/wikipedia/en/b/bf/Retro_Bowl_cover.png">
+                <div class="game-label">Retro Bowl</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Gun Spin -->
+    <div class="game-card">
+        <a href="./games/gunspin.html">
+            <div class="game-thumbnail">
+                <img src="https://say.games/_next/image?url=https%3A%2F%2Fweb-saystore-backend.sgdn.io%2Fgunspiw%2Ficon___bqkktB9DMKoO&w=1920&q=75">
+                <div class="game-label">Gun Spin</div>
+            </div>
+        </a>
+    </div> 
+
+    <!--Backrooms-->
+    <div class="game-card">
+        <a href="./games/backrooms.html">
+            <div class="game-thumbnail">
+                <img src="https://cdn.cloudflare.steamstatic.com//steam/apps/1825160/header.jpg">
+                <div class="game-label">Backrooms</div>
+            </div>
+         </a>
+      </div> 
+
+    <!-- Speed Stars -->
+    <div class="game-card">
+        <a href="./games/clspeedstars.html">
+            <div class="game-thumbnail">
+                <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1482700/header.jpg?t=1612830067">
+                <div class="game-label">Speed Stars</div>
+            </div>
+         </a>
+      </div>
+
+      <!-- Snow Rider 3D -->
+      <div class="game-card">
+        <a href="./games/snowrider3d.html">
+            <div class="game-thumbnail">
+                <img src="https://snowrider3d.com/cache/data/image/game/snow-rider-3d/snow-rider-3d-m250x250.webp">
+                <div class="game-label">Snow Rider 3D</div>
+            </div>
+         </a>
+      </div>
+
+        <!-- Subway Surfers -->
+      <div class="game-card">
+        <a href="./games/subwaysurfers.html">
+            <div class="game-thumbnail">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5UZf8i4h3jiVJwUTMpeb3PVve8XZYc1N7HQ&s">
+                <div class="game-label">Subway Surfers</div>
+            </div>
+         </a>
+      </div>
+
+      <!-- Slope Plus -->
+      <div class="game-card"> 
+        <a href="./games/slope.html">
+            <div class="game-thumbnail">
+                <img src="https://swing-monkey.com/wp-content/uploads/thumbs/custom/S/Slope-unblocked-logo-1.webp">
+                <div class="game-label">Slope Plus</div>
+            </div>
+         </a>
+      </div>
+
+        <!-- Clover Pit -->
+        <div class="game-card">
+        <a href="./games/cloverpit.html">
+            <div class="game-thumbnail">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/CloverPit_cover.jpeg/250px-CloverPit_cover.jpeg">
+                <div class="game-label">Clover Pit</div>
+            </div>
+         </a>
+      </div>
+
+      <!--Ragdoll Hit-->
+      <div class="game-card">
+        <a href="./games/ragdollhit.html">
+            <div class="game-thumbnail">
+                <img src="https://cdn2.steamgriddb.com/thumb/c36624d086e29cd78ead087f6c042f67.jpg">
+                <div class="game-label">Ragdoll Hit</div>
+            </div>
+            </a>
+        </div>
+
+        <!-- Raft -->
+        <div class="game-card">
+        <a href="./games/raft.html">
+            <div class="game-thumbnail">
+                <img src="https://sc.filehippo.net/images/t_app-icon-l/p/f3f6c4c1-eefb-493a-811d-833b6788f593/2086534899/raft-logo.png">
+                <div class="game-label">Raft</div>
+            </div>
+            </a>
+        </div>
+
+        <!--getyoked-->
+        <div class="game-card">
+        <a href="./games/getyoked.html">
+            <div class="game-thumbnail">
+                <img src="https://img.itch.zone/aW1nLzE5NDg4MDY1LnBuZw==/original/0eezqm.png">
+                <div class="game-label">Get Yoked</div>
+            </div>
+            </a>
+        </div>
+
+        <!-- Fruit Ninja -->
+        <div class="game-card">
+        <a href="./games/fruit_ninja.html">
+            <div class="game-thumbnail">
+                <img src="https://cdn.prod.website-files.com/5fa23905123118739c5e21e2/64dd8b9d1a903a3f764b814b_FNCThumbnail.png">
+                <div class="game-label">Fruit Ninja</div>
+            </div>
+            </a>
+        </div>
+
+        <!-- Chess Classic -->
+        <div class="game-card">
+        <a href="./games/chess.html">
+            <div class="game-thumbnail">
+                <img src="https://as1.ftcdn.net/jpg/04/22/01/80/1000_F_422018007_YPxxhH5X4a1hVKsb4SHvkSl8iH0BWxBv.jpg">
+                <div class="game-label">Chess Classic</div>
+            </div>
+            </a>
+        </div>
+
+        <!--Steal a Brainrot-->
+        <div class="game-card">
+        <a href="./games/clsabduel.html">
+            <div class="game-thumbnail">
+                <img src="https://massivelyop.com/wp-content/uploads/2026/01/roblox-steal-a-brainrot-696x229.jpg">
+                <div class="game-label">Steal a Brainrot</div>
+            </div>
+            </a>
+        </div>
+
+<!--99 Nights-->
+        <div class="game-card">
+        <a href="./games/cl99nightsitf.html">
+            <div class="game-thumbnail">
+                <img src="https://tr.rbxcdn.com/180DAY-c366802209f06d9e481d4b4849090a83/500/280/Image/Jpeg/noFilter">
+                <div class="game-label">99 Nights</div>
+            </div>
+            </a>
+        </div>
+
+        <!--1v1.lol-->
+        <div class="game-card">
+        <a href="./games/cl1v1lol.html">
+            <div class="game-thumbnail">
+                <img src="https://cdn-bgp.bluestacks.com/BGP/us/gametiles_lol.onevone.jpg">
+                <div class="game-label">1v1.lol</div>
+            </div>
+            </a>
+        </div>
+</div>
+</div>
+
+<script>
+/* SEARCH */
+const searchBar = document.getElementById("searchBar");
+const cards = document.querySelectorAll(".game-card");
+
+searchBar.addEventListener("input", () => {
+    const v = searchBar.value.toLowerCase();
+    cards.forEach(c => {
+        c.style.display = c.innerText.toLowerCase().includes(v) ? "block" : "none";
+    });
+});
+
+/* CURSOR */
+const cursor = document.querySelector(".cursor");
+
+document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+    const t = document.createElement("div");
+    t.className = "trail";
+    t.style.left = e.clientX + "px";
+    t.style.top = e.clientY + "px";
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 600);
+});
+
+document.addEventListener("click", (e) => {
+    const r = document.createElement("div");
+    r.className = "ripple";
+    r.style.left = e.clientX + "px";
+    r.style.top = e.clientY + "px";
+    document.body.appendChild(r);
+    setTimeout(() => r.remove(), 600);
+});
+
+/* PARTICLES */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = innerWidth;
+canvas.height = innerHeight;
+
+let p = [];
+
+for (let i = 0; i < 80; i++) {
+    p.push({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        s: Math.random()*2,
+        vx: (Math.random()-0.5)*0.4,
+        vy: (Math.random()-0.5)*0.4
+    });
+}
+
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    p.forEach(a=>{
+        a.x += a.vx;
+        a.y += a.vy;
+
+        if(a.x<0)a.x=canvas.width;
+        if(a.x>canvas.width)a.x=0;
+        if(a.y<0)a.y=canvas.height;
+        if(a.y>canvas.height)a.y=0;
+
+        ctx.fillStyle="rgba(123,91,255,0.6)";
+        ctx.beginPath();
+        ctx.arc(a.x,a.y,a.s,0,Math.PI*2);
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
+
+

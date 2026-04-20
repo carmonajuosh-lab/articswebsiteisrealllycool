@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Log in to i-ready Connect</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #0c0c14;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+
+        /* SEARCH BAR */
+        #movieSearch {
+            width: 100%;
+            max-width: 420px;
+            padding: 12px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 999px;
+            border: none;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        /* MOVIE GRID */
+.movie-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 30px;
+}
+
+/* CARD STYLE */
+.movie-card a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    position: relative;
+    z-index: 2;
+}
+
+.movie-card::after {
+    pointer-events: none;
+}
+/* IMAGE */
+.movie-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    padding: 20px;
+    background: rgba(0,0,0,0.4);
+    transition: 0.3s ease;
+}
+
+/* TEXT */
+.movie-label {
+    padding: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+/* HOVER EFFECT 🔥 */
+.movie-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 50px rgba(123, 91, 255, 0.5);
+}
+
+.movie-card:hover img {
+    filter: brightness(1.1);
+}
+/* COOL HOME BUTTON */
+.home-button {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 999;
+
+    padding: 10px 18px;
+    border-radius: 999px;
+
+    background: linear-gradient(135deg, #ff5b77, #7b5bff);
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+
+    box-shadow: 0 10px 25px rgba(123, 91, 255, 0.4);
+    transition: 0.25s ease;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* HOVER 🔥 */
+.home-button:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 20px 45px rgba(123, 91, 255, 0.6);
+    filter: brightness(1.1);
+}
+
+/* CLICK */
+.home-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 8px 20px rgba(123, 91, 255, 0.4);
+}
+.movie-card:hover::after {
+    opacity: 1;
+}
+body {
+    cursor: none;
+}
+
+a, button, .cool-button, div {
+    cursor: none !important;
+}
+
+/* cursor */
+.cursor {
+    width: 14px;
+    height: 14px;
+    background: #7b5bff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    box-shadow: 0 0 25px #7b5bff;
+}
+
+/* trail */
+.trail {
+    width: 8px;
+    height: 8px;
+    background: rgba(123,91,255,0.6);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    animation: fadeOut 0.6s forwards;
+    z-index: 9998;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+}
+
+/* ripple */
+.ripple {
+    position: fixed;
+    border-radius: 50%;
+    border: 2px solid rgba(123,91,255,0.8);
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%);
+    animation: rippleAnim 0.6s ease-out forwards;
+    pointer-events: none;
+    z-index: 9997;
+}
+
+@keyframes rippleAnim {
+    to {
+        width: 80px;
+        height: 80px;
+        opacity: 0;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <a class="home-button" href="index.html">🏠Home</a>
+
+
+<h2>Movies</h2>
+
+<input type="text" id="movieSearch" placeholder="This is here for decoration">
+
+<div class="movie-container">
+
+<div class="movie-card">
+  <a href="https://tubitv.com">
+    <img src="https://corporate.tubitv.com/wp-content/uploads/2024/02/Tubi-Logo-e1713910821154.png">
+    <p class="movie-label">Tubi Movies</p>
+  </a>
+</div>
+
+  <div class="movie-card">
+  <a href="https://www.youtube.com/results?search_query=free+movies">
+    <img src="https://www.logoai.com/uploads/output/2025/07/08/e49c83b6055bf988edddb5afeb16b3c7.jpg?t=1751964496">
+    <p class="movie-label">YouTube Movies</p>
+  </a>
+</div>
+
+  <div class="movie-card">
+  <a href="https://plex.tv/watch-free">
+    <img src="https://preview.redd.it/new-plex-logo-v0-5x93lknmuaw81.jpg?auto=webp&s=a8edd33ea3d1f38929c7917abea05291ad49f528">
+    <p class="movie-label">Plex Movies</p>
+  </a>
+</div>
+
+</div>
+
+<script>
+const movieSearch = document.getElementById("movieSearch");
+const movieCards = document.querySelectorAll(".movie-card");
+
+movieSearch.addEventListener("input", function () {
+    const value = this.value.toLowerCase();
+
+    movieCards.forEach(card => {
+        const title = card.querySelector(".movie-label").innerText.toLowerCase();
+
+        if (title.includes(value)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
+</script>
+<script>
+const cursor = document.querySelector(".cursor");
+
+// move cursor
+document.addEventListener("mousemove", (e) => {
+    cursor.style.left = e.clientX + "px";
+    cursor.style.top = e.clientY + "px";
+
+    const trail = document.createElement("div");
+    trail.className = "trail";
+    trail.style.left = e.clientX + "px";
+    trail.style.top = e.clientY + "px";
+    document.body.appendChild(trail);
+
+    setTimeout(() => trail.remove(), 600);
+});
+
+// click ripple
+document.addEventListener("click", (e) => {
+    const ripple = document.createElement("div");
+    ripple.className = "ripple";
+    ripple.style.left = e.clientX + "px";
+    ripple.style.top = e.clientY + "px";
+    document.body.appendChild(ripple);
+
+    setTimeout(() => ripple.remove(), 600);
+});
+</script>
+
+</body>
+</html>
